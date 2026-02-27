@@ -83,19 +83,22 @@ class AlienInvasion:
         new_bullet = Bullet(self)
         self.bullets.add(new_bullet)
     
+    def _create_alien(self, x_position):
+        """Create an alien and place it in the row."""
+        new_alien = Alien(self)
+        new_alien.x = x_position
+        new_alien.rect.x = x_position
+        self.aliens.add(new_alien)
+    
     def _create_fleet(self):
       """Create the fleet of aliens."""
-      
+
       alien = Alien(self)
       alien_width = alien.rect.width
       current_x = alien_width
-      
-      while current_x < (self.settings.screen_width - 2 * alien_width):
-        new_alien = Alien(self)
-        new_alien.x = current_x
-        new_alien.rect.x = current_x
-        self.aliens.add(new_alien)
 
+      while current_x < (self.settings.screen_width - 2 * alien_width):
+        self._create_alien(current_x)
         current_x += 2 * alien_width
 
 if __name__ == '__main__':
