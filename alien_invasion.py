@@ -69,6 +69,12 @@ class AlienInvasion:
             self.bullets.remove(bullet)
 
       collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+      # If the entire fleet is destroyed, start a new level.
+      if not self.aliens:
+        # Destroy existing bullets and create new fleet.
+        self.bullets.empty()
+        self._create_fleet()
     
     def _update_aliens(self):
       """Check if the fleet is at an edge, then update positions."""
