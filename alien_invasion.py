@@ -32,12 +32,15 @@ class AlienInvasion:
 
     def run_game(self):
         """Start the main loop for the game."""
-        while self.game_active:
-            self._check_events()
+        while True:
+          self._check_events()
+
+          if self.game_active:
             self.ship.update()
             self._update_bullets()
             self._update_aliens()
-            self._update_screen()
+            
+          self._update_screen()
     
     def _check_events(self):
       for event in pygame.event.get():
