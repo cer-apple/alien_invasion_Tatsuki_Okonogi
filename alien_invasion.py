@@ -194,6 +194,8 @@ class AlienInvasion:
         # Decrement ships_left.
         self.stats.ships_left -= 1
 
+        self.sb.prep_ships()
+
         # Get rid of any remaining bullets and aliens.
         self.bullets.empty()
         self.aliens.empty()
@@ -223,6 +225,9 @@ class AlienInvasion:
       if button_clicked and not self.game_active:
         # Reset the game statistics.
         self.stats.reset_stats()
+
+        self.settings.initialize_dynamic_settings()
+        
         self.sb.prep_score()
         self.sb.prep_high_score()
         self.sb.prep_level()
