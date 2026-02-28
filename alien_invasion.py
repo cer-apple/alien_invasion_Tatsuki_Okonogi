@@ -218,6 +218,7 @@ class AlienInvasion:
       if button_clicked and not self.game_active:
         # Reset the game statistics.
         self.stats.reset_stats()
+        self.sb.prep_score()
         self.game_active = True
         
         # Get rid of any remaining bullets and aliens.
