@@ -37,21 +37,22 @@ class AlienInvasion:
         self.play_button = Button(self, "Play")
 
     def run_game(self):
-        """Start the main loop for the game."""
-        while True:
-          self._check_events()
+      print("RUN_GAME started")
+      while True:
+        self._check_events()
 
-          if self.game_active:
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
-            
-          self._update_screen()
+        if self.game_active:
+          self.ship.update()
+          self._update_bullets()
+          self._update_aliens()
+          
+        self._update_screen()
     
     def _check_events(self):
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            sys.exit()
+          print("QUIT event received -> exiting")
+          sys.exit()
         
         elif event.type == pygame.KEYDOWN:
           self._check_keydown_events(event)
@@ -93,6 +94,12 @@ class AlienInvasion:
       """Respond to bullet-alien collisions."""
       collisions = pygame.sprite.groupcollide(
         self.bullets, self.aliens, True, True)
+      
+      #Make sure to score all hits
+      if collisions:
+        for aliens in collisions.values():
+          self.stats.score += self.settings.alien_points * len(aliens)
+          self.sb.prep_score()
 
       if not self.aliens:
         self.bullets.empty()
